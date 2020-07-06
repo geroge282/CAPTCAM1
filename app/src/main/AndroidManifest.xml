@@ -13,7 +13,7 @@
         <activity android:name=".captura_rostro" />
         <activity android:name=".usuario" />
         <activity android:name=".Registro" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".AuthActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
