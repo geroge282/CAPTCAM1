@@ -16,7 +16,7 @@ public class AuthActivity extends AppCompatActivity {
 
     public void btnIngresar(View v){
 
-        Intent intent=new Intent(v.getContext(), usuario.class);
+        Intent intent=new Intent(v.getContext(), homeUsuario.class);
         startActivityForResult(intent,0);
 
     }

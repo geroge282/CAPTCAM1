@@ -11,7 +11,7 @@
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".confirmacion"></activity>
         <activity android:name=".captura_rostro" />
-        <activity android:name=".usuario" />
+        <activity android:name=".homeUsuario" />
         <activity android:name=".Registro" />
         <activity android:name=".AuthActivity">
             <intent-filter>
