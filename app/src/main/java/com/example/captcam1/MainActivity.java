@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         Intent intent=new Intent(v.getContext(), Registro.class);
         startActivityForResult(intent,0);
-
+ //comentario
     }
     public void BotonSalir(View v){
 
