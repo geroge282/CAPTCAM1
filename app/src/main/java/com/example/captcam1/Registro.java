@@ -14,4 +14,10 @@ public class Registro extends AppCompatActivity {
         setContentView(R.layout.activity_registro);
     }
 
+    //  private void registrarUsuario() {
+       // final String email= correoAuth.getText().toString();
+     //   final String password= passwordAuth.getText().toString();
+    //    String usuario=;
+  //  }
+
 }

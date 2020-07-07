@@ -31,24 +31,25 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_auth);
-       correoAuth=findViewById(R.id.ptUsuario);
-       passwordAuth=findViewById(R.id.ptPassword);
-       btnIngresar=findViewById(R.id.btnIngresar);
-        btnRegistrar=findViewById(R.id.btnRegistrar);
-       btnSalir=findViewById(R.id.btnSalir);
-       pbCarga=findViewById(R.id.pbCarga);
-       pbCarga.setVisibility(View.INVISIBLE);
-        mAuth = FirebaseAuth.getInstance();
+           correoAuth=findViewById(R.id.ptUsuario);
+           passwordAuth=findViewById(R.id.ptPassword);
+           btnIngresar=findViewById(R.id.btnIngresar);
+           btnRegistrar=findViewById(R.id.btnRegistrar);
 
-        listener = new FirebaseAuth.AuthStateListener() {
+           btnSalir=findViewById(R.id.btnSalir);
+           pbCarga=findViewById(R.id.pbCarga);
+           pbCarga.setVisibility(View.INVISIBLE);
+           mAuth = FirebaseAuth.getInstance();
+           listener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
                 FirebaseUser user=mAuth.getCurrentUser();
                 if(user==null){
-                    Toast.makeText(getApplicationContext(),"CORRECTO",Toast.LENGTH_LONG).show();
-
+                    //no esta logueado
+                    Toast.makeText(getApplicationContext(),"Revise usuario o password",Toast.LENGTH_LONG).show();
                 }
                 else{
+                    abrirCuenta();
                     Toast.makeText(getApplicationContext(),"CORRECTO Y LOGUEADO",Toast.LENGTH_LONG).show();
 
                 }
@@ -59,20 +60,21 @@ public class AuthActivity extends AppCompatActivity {
 
     }
 
-
+    private void abrirCuenta() {
+        Intent i=new Intent(this, homeUsuario.class);
+        startActivity(i);
+        finish();
+    }
 
     public void btnIngresar(View v){
-
-ingresar();
-        /*Intent intent=new Intent(v.getContext(), homeUsuario.class);
-        startActivityForResult(intent,0);*/
-
+    ingresar();
     }
 
     private void ingresar() {
         String email =correoAuth.getText().toString();
         String password= passwordAuth.getText().toString();
         if (!email.isEmpty()&& !password.isEmpty()){
+            pbCarga.setVisibility(View.VISIBLE);
             mAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
@@ -83,17 +85,25 @@ ingresar();
                         Toast.makeText(getApplicationContext(),"INCORRECTO",Toast.LENGTH_LONG).show();
 
                     }
+                    pbCarga.setVisibility(View.INVISIBLE);
                 }
             });
         }
     }
 
+
+
+
     public void BotonRegistro(View v){
 
-     /*   Intent intent=new Intent(v.getContext(), Registro.class);
-        startActivityForResult(intent,0);*/
- //comentario
+
+       Intent intent=new Intent(v.getContext(), Registro.class);
+        startActivityForResult(intent,0);
+
     }
+
+
+
     public void BotonSalir(View v){
 
         Intent intent=new Intent(Intent.ACTION_MAIN);
