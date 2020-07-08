@@ -125,4 +125,5 @@ public class AuthActivity extends AppCompatActivity {
             mAuth.removeAuthStateListener(listener);
         }
     }
+
 }
