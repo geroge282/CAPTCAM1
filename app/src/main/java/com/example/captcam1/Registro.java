@@ -93,21 +93,21 @@ public class Registro extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(Registro.this,"Se ha registrado el usuario",Toast.LENGTH_LONG).show();
+                      //  abrirHomeUsuario();
                     }else
                     {
                         Toast.makeText(Registro.this,"No se ha registrado el usuario",Toast.LENGTH_LONG).show();
+                        onStop();
                     }
                     pbProgreso.dismiss();
-
                 }
             });
-
-        }
-
+        }//else
     }
 
 
-
-
-
 }
+
+
+
+

@@ -47,9 +47,10 @@ public class AuthActivity extends AppCompatActivity {
                 if(user==null){
                     //no esta logueado
                     Toast.makeText(getApplicationContext(),"Revise usuario o password",Toast.LENGTH_LONG).show();
+
                 }
                 else{
-                    abrirCuenta();
+
                     Toast.makeText(getApplicationContext(),"CORRECTO Y LOGUEADO",Toast.LENGTH_LONG).show();
 
                 }
@@ -80,7 +81,7 @@ public class AuthActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if(task.isSuccessful()){
                         Toast.makeText(getApplicationContext(),"CORRECTO",Toast.LENGTH_LONG).show();
-
+                        abrirCuenta();
                     }else{
                         Toast.makeText(getApplicationContext(),"INCORRECTO",Toast.LENGTH_LONG).show();
 
@@ -112,18 +113,7 @@ public class AuthActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        mAuth.addAuthStateListener(listener);
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(listener!=null){
-            mAuth.removeAuthStateListener(listener);
-        }
-    }
+
 
 }
