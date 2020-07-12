@@ -1,13 +1,17 @@
 package com.example.captcam1;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,23 +29,29 @@ public class Registro extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener listener;
     private ProgressDialog pbProgreso;
+    private ImageView Rostro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
+        Rostro=findViewById(R.id.ivRostro   );
         txtNombre= findViewById(R.id.edNombre);
         txtcorreo=findViewById(R.id.edCorreo);
         txtPassword=findViewById(R.id.edPassword);
         Button btnGuardar1 = findViewById(R.id.btnGuardar);
         Button btnRegresar1 = findViewById(R.id.btnRegresar);
+
         mAuth=FirebaseAuth.getInstance();
         pbProgreso=new ProgressDialog(this);
         pbProgreso.setIndeterminate(true);
         btnGuardar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,0);
                 registrarUsuario();
+
 
             }
 
@@ -65,6 +75,15 @@ public class Registro extends AppCompatActivity {
                 }
             }
         };
+
+    }
+
+
+    public void BotonCaptura(View v){
+
+        Intent intent=new Intent(v.getContext(), captura_rostro.class);
+        startActivityForResult(intent,0);
+
     }
 
     private void abrirHomeUsuario() {

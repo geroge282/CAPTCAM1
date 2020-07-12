@@ -2,8 +2,14 @@ package com.example.captcam1;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
+import android.app.DownloadManager;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,10 +32,14 @@ public class AuthActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
     ProgressBar pbCarga;
     FirebaseAuth.AuthStateListener listener;
+    final private int REQUEST_CODE_ASK_PERMISSION=111;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        solicitarpermisos();
+
         setContentView(R.layout.activity_auth);
            correoAuth=findViewById(R.id.ptUsuario);
            passwordAuth=findViewById(R.id.ptPassword);
@@ -59,6 +69,19 @@ public class AuthActivity extends AppCompatActivity {
 
 
 
+    }
+
+    private void solicitarpermisos() {
+        int permisoMemoria= ActivityCompat.checkSelfPermission(AuthActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        int permisoEscrituraMemoria= ActivityCompat.checkSelfPermission(AuthActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisoCamara= ActivityCompat.checkSelfPermission(AuthActivity.this, Manifest.permission.CAMERA);
+
+        if(permisoEscrituraMemoria!= PackageManager.PERMISSION_GRANTED || permisoMemoria!=PackageManager.PERMISSION_GRANTED || permisoCamara!=PackageManager.PERMISSION_GRANTED){
+            if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.M){
+
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE,Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE},REQUEST_CODE_ASK_PERMISSION);
+            }
+        }
     }
 
     private void abrirCuenta() {
