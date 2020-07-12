@@ -8,6 +8,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.os.storage.StorageManager;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
@@ -21,6 +22,8 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 public class Registro extends AppCompatActivity {
     private TextView txtNombre;
@@ -30,6 +33,7 @@ public class Registro extends AppCompatActivity {
     private FirebaseAuth.AuthStateListener listener;
     private ProgressDialog pbProgreso;
     ImageView Rostro;
+    private StorageReference mStorage ;
 
 
     @Override
@@ -39,7 +43,7 @@ public class Registro extends AppCompatActivity {
 
 
 
-
+        mStorage= FirebaseStorage.getInstance().getReference();
         txtNombre= findViewById(R.id.edNombre);
         txtcorreo=findViewById(R.id.edCorreo);
         txtPassword=findViewById(R.id.edPassword);
@@ -88,6 +92,7 @@ public class Registro extends AppCompatActivity {
                 startActivityForResult(intent,0);
             }
         });
+
 
 
     }
