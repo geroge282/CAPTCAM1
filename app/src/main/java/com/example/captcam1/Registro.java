@@ -19,8 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 public class Registro extends AppCompatActivity {
-    private Button btnGuardar;
-    private Button btnRegresar;
     private TextView txtNombre;
     private TextView txtcorreo;
     private TextView txtPassword;
@@ -35,12 +33,12 @@ public class Registro extends AppCompatActivity {
         txtNombre= findViewById(R.id.edNombre);
         txtcorreo=findViewById(R.id.edCorreo);
         txtPassword=findViewById(R.id.edPassword);
-        btnGuardar=findViewById(R.id.btnGuardar);
-        btnRegresar=findViewById(R.id.btnRegresar);
+        Button btnGuardar1 = findViewById(R.id.btnGuardar);
+        Button btnRegresar1 = findViewById(R.id.btnRegresar);
         mAuth=FirebaseAuth.getInstance();
         pbProgreso=new ProgressDialog(this);
         pbProgreso.setIndeterminate(true);
-        btnGuardar.setOnClickListener(new View.OnClickListener() {
+        btnGuardar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registrarUsuario();
@@ -49,7 +47,7 @@ public class Registro extends AppCompatActivity {
 
 
         });
-        btnRegresar.setOnClickListener(new View.OnClickListener() {
+        btnRegresar1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 abrirLogin();
