@@ -29,13 +29,17 @@ public class Registro extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener listener;
     private ProgressDialog pbProgreso;
-    private ImageView Rostro;
+    ImageView Rostro;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
-        Rostro=findViewById(R.id.ivRostro   );
+
+
+
+
         txtNombre= findViewById(R.id.edNombre);
         txtcorreo=findViewById(R.id.edCorreo);
         txtPassword=findViewById(R.id.edPassword);
@@ -75,16 +79,27 @@ public class Registro extends AppCompatActivity {
                 }
             }
         };
+        Rostro= findViewById(R.id.imageViewId);
+        Button capturaRostro = findViewById(R.id.tomarFoto);
+        capturaRostro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent= new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent,0);
+            }
+        });
 
+
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Bitmap bitmap=(Bitmap)data.getExtras().get("data");
+        Rostro.setImageBitmap(bitmap);
     }
 
 
-    public void BotonCaptura(View v){
 
-        Intent intent=new Intent(v.getContext(), captura_rostro.class);
-        startActivityForResult(intent,0);
-
-    }
 
     private void abrirHomeUsuario() {
         Intent i =new Intent(this, homeUsuario.class);

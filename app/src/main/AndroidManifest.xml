@@ -19,7 +19,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <activity android:name=".confirmacion" />
-        <activity android:name=".captura_rostro" />
         <activity android:name=".homeUsuario" />
         <activity android:name=".Registro" />
         <activity android:name=".AuthActivity">
